@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:16:27 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/28 08:43:17 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:01:29 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 #include <string>
 #include <cstring>
 #include <stdlib.h>
+#include <limits.h>
+#include <iomanip>
 
 int  printError(int i);
+int  extremeCasesChar(const char *value);
+int  extremeCasesInt(const char *value);
 
 class ScalarConverter
 {

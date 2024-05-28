@@ -6,67 +6,85 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:19:20 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/28 08:59:25 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:01:49 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-void handleInt(const char *value);
-
 void handleChar(const char *value);
-void printChar(const char *value);
-void printCharFromInt(int value);
+void handleInt(const char *value);
+void handleFloat(const char *value);
 
 void ScalarConverter::convert(const char *value)
 {
   // int valueInt = atoi(value);
 
-  handleInt(value);
   handleChar(value);
+  handleInt(value);
+  // handleFloat(value);
+}
+
+void handleChar(const char *value)
+{
+  int  valueInt = atoi(value);
+  bool isDisplayable = true;
+  char output = '\0';
+
+  std::cout << FYEL("Char value is: ");
+  if (extremeCasesChar(value)) return ;
+
+  if (valueInt == 0 && strlen(value) == 1 && std::isprint(value[0])) {
+    if (static_cast<int>(value[0]) == 48) {isDisplayable = false; }
+    output = value[0];
+  }
+  else if (valueInt >= 32 && valueInt <= 126) {
+    output = static_cast<char>(valueInt);
+  }
+  else { isDisplayable = false; }
+
+  if (isDisplayable) {
+      std::cout << FYEL("\'") << BOLD(FYEL(output)) << FYEL("\'");
+  } else {
+      std::cout << BOLD(FYEL("Non displayable"));
+  }
+  std::cout << std::endl;
 }
 
 void handleInt(const char *value)
 {
   int valueInt = atoi(value);
-  int output;
+  int output = 0;
 
-  if (valueInt == 0 && strlen(value) == 1) {
-    output = (int(value[0]) == 48) ? 0 : value[0];
+  std::cout << FMAG("Int value is: ");
+  if (extremeCasesInt(value)) { return ; }
+
+  if (valueInt == 0)
+  {
+    for (size_t i = 0; i < strlen(value); i++) {
+      output += (static_cast<int>(value[i]) == 48 ? 0 : value[i]);
+    }
   } else {
     output = valueInt;
   }
-  std::cout <<
-    FMAG("Int value is: ")
-    << BOLD(FMAG(output))
-  << std::endl;
+  std::cout << BOLD(FMAG(output)) << std::endl;
 }
 
-void handleChar(const char *value)
-{
-  int valueInt = atoi(value);
+// void handleFloat(const char *value)
+// {
+//   float valueFloat = atof(value);
+//   float output = 0;
 
-  std::cout << FYEL("Char value is: ");
-  if ((valueInt > 9 && strlen(value) == 1)) {
-    printChar(value);
-  } else {
-    printCharFromInt(valueInt);
-  }
-}
+//   std::cout << FCYN("Float value is: ");
+//   if (extremeCasesInt(value)) { return ; }
 
-void printCharFromInt(int value)
-{
-  char c = static_cast<char>(value);
-
-  if (std::isprint(c) && (value >= 32 && value <= 126)) {
-    std::cout << BOLD(FYEL('\'')) << BOLD(FYEL(c)) << BOLD(FYEL('\'')) << std::endl;
-  } else {
-    std::cout << ITAL(FYEL("Non displayable")) << std::endl;
-  }
- 
-}
-
-void printChar(const char *value)
-{
-  std::cout << BOLD(FYEL('\'')) << BOLD(FYEL(value)) << BOLD(FYEL('\'')) << std::endl;
-}
+//   if (valueFloat == 0)
+//   {
+//     for (size_t i = 0; i < strlen(value); i++) {
+//       output += (static_cast<float>(value[i]) == 48 ? 0 : value[i]);
+//     }
+//   } else {
+//     output = valueFloat;
+//   }
+//   std::cout << std::fixed << std::setprecision(1) << BOLD(FCYN(output)) << std::endl;
+// }

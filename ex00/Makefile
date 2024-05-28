@@ -1,6 +1,6 @@
 CXX				:= c++
 HEADERS		:= -Iinclude -Icolor
-CXXFLAGS	:= -Wall -Wextra -Werror -Wshadow -std=c++98
+CXXFLAGS	:= -Wall -Wextra -Werror -Wshadow -g3 -std=c++98
 TARGET		:= convert
 
 SRC_PATH	:= src
