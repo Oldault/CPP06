@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:19:20 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/17 17:25:39 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/05/28 08:59:25 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void printCharFromInt(int value);
 
 void ScalarConverter::convert(const char *value)
 {
-  int valueInt = atoi(value);
+  // int valueInt = atoi(value);
 
-  (void)valueInt;
   handleInt(value);
   handleChar(value);
 }
@@ -30,17 +29,17 @@ void ScalarConverter::convert(const char *value)
 void handleInt(const char *value)
 {
   int valueInt = atoi(value);
-  char c;
-  
-  if (strlen(value) == 1)
-    c = value[0];
+  int output;
 
-  std::cout << FMAG("Int value is: ");
-  if (valueInt == 0 && c) {
-    std::cout << BOLD(FMAG(int(c))) << std::endl;
+  if (valueInt == 0 && strlen(value) == 1) {
+    output = (int(value[0]) == 48) ? 0 : value[0];
   } else {
-    std::cout << BOLD(FMAG(valueInt)) << std::endl;
+    output = valueInt;
   }
+  std::cout <<
+    FMAG("Int value is: ")
+    << BOLD(FMAG(output))
+  << std::endl;
 }
 
 void handleChar(const char *value)
