@@ -6,11 +6,13 @@
 /*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:40:07 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/29 14:36:34 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:03:45 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+
+size_t get_precision(const std::string &s);
 
 void ScalarConverter::convert(const std::string &literal)
 {
@@ -70,10 +72,45 @@ void ScalarConverter::printChar(const std::string &literal)
 
 void ScalarConverter::printNumber(const std::string &literal)
 {
-  std::cout << "Number Detected: " << literal << std::endl;
+  double valueDouble = atof(literal.c_str());
+  int valueInt = static_cast<int>(valueDouble);
+
+  /* Char printing */
+  std::cout << FYEL("Char:\t");
+  if (valueInt >= 32 && valueInt <= 126)
+    std::cout << FYEL("\'") << BOLD(FYEL(static_cast<char>(valueInt))) << FYEL("\'");
+  else
+    std::cout << BOLD(FRED("Non displayable"));
+  std::cout << std::endl;
+
+  /* Int printing */
+  std::cout << FMAG("Int:\t");
+  if (valueDouble >= INT_MAX) std::cout << BOLD(FMAG(INT_MAX));
+  else if (valueDouble <= INT_MIN) std::cout << BOLD(FMAG(INT_MIN));
+  else std::cout << BOLD(FMAG(valueInt));
+  std::cout << std::endl;
+
+  /* Float and Double printing */
+  std::ostringstream floatStream;
+  std::ostringstream doubleStream;
+  size_t precision = get_precision(literal);
+  floatStream << std::fixed << std::setprecision(precision) << static_cast<float>(valueDouble);
+  doubleStream << std::fixed << std::setprecision(precision) << static_cast<double>(valueDouble);
+
+  std::cout << FCYN("Float:\t") <<  BOLD(FCYN(floatStream.str())) << FCYN("f") << std::endl;
+  std::cout << FGRN("Double:\t") <<  BOLD(FGRN(doubleStream.str())) << std::endl;
 }
 
 void ScalarConverter::printException(const std::string &literal)
 {
   std::cout << "Exception Detected: " << literal << std::endl;
+}
+
+size_t get_precision(const std::string &s)
+{
+  size_t dotPos = s.find('.');
+  if (dotPos == std::string::npos) {
+    return 1;
+  }
+  return s.size() - dotPos - 1;
 }
