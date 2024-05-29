@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:16:27 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/28 14:01:29 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/05/29 08:59:47 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,32 @@
 #include <limits.h>
 #include <iomanip>
 
-int  printError(int i);
-int  extremeCasesChar(const char *value);
-int  extremeCasesInt(const char *value);
+// int  printError(int i);
+// int  extremeCasesChar(const std::string &literal);
+// int  extremeCasesInt(const std::string &literal);
 
 class ScalarConverter
 {
   private:
-    ScalarConverter(void);
-  
-  public:
+
+    /* Life Cycle */
+    explicit ScalarConverter(void);
     ScalarConverter(const ScalarConverter &src);
     ~ScalarConverter(void);
-
     ScalarConverter &operator=(const ScalarConverter &src);
 
-    static void convert(const char *value);
+    /* Core functionality */
+    static bool isChar(const std::string &s);
+    static bool isNumber(const std::string &s);
+    static bool isException(const std::string &s);
+  
+    static void printChar(const std::string &literal);
+    static void printNumber(const std::string &literal);
+    static void printException(const std::string &literal);
+    
+  public:
+
+    static void convert(const std::string &literal);
 };
 
 

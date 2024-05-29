@@ -3,88 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 14:19:20 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/28 14:01:49 by svolodin         ###   ########.fr       */
+/*   Created: 2024/05/29 08:40:07 by oldault           #+#    #+#             */
+/*   Updated: 2024/05/29 09:51:17 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-void handleChar(const char *value);
-void handleInt(const char *value);
-void handleFloat(const char *value);
-
-void ScalarConverter::convert(const char *value)
+void ScalarConverter::convert(const std::string &literal)
 {
-  // int valueInt = atoi(value);
-
-  handleChar(value);
-  handleInt(value);
-  // handleFloat(value);
-}
-
-void handleChar(const char *value)
-{
-  int  valueInt = atoi(value);
-  bool isDisplayable = true;
-  char output = '\0';
-
-  std::cout << FYEL("Char value is: ");
-  if (extremeCasesChar(value)) return ;
-
-  if (valueInt == 0 && strlen(value) == 1 && std::isprint(value[0])) {
-    if (static_cast<int>(value[0]) == 48) {isDisplayable = false; }
-    output = value[0];
-  }
-  else if (valueInt >= 32 && valueInt <= 126) {
-    output = static_cast<char>(valueInt);
-  }
-  else { isDisplayable = false; }
-
-  if (isDisplayable) {
-      std::cout << FYEL("\'") << BOLD(FYEL(output)) << FYEL("\'");
+  if (isChar(literal)) {
+    printChar(literal);
+  } else if (isNumber(literal)) {
+    printNumber(literal);
+  } else if (isException(literal)) {
+    printException(literal);
   } else {
-      std::cout << BOLD(FYEL("Non displayable"));
+    std::cout <<
+      "\n" << BRED(" Invalid Type: ") << "\n\t" <<
+      FRED(ITAL(" The parameter is neither a decimal notation, nor a char literal.\n"))
+      << std::endl;
   }
-  std::cout << std::endl;
+  return ;
 }
 
-void handleInt(const char *value)
+bool ScalarConverter::isChar(const std::string &s)
 {
-  int valueInt = atoi(value);
-  int output = 0;
-
-  std::cout << FMAG("Int value is: ");
-  if (extremeCasesInt(value)) { return ; }
-
-  if (valueInt == 0)
-  {
-    for (size_t i = 0; i < strlen(value); i++) {
-      output += (static_cast<int>(value[i]) == 48 ? 0 : value[i]);
-    }
-  } else {
-    output = valueInt;
-  }
-  std::cout << BOLD(FMAG(output)) << std::endl;
+  return s.length() == 1 && std::isprint(s[0]) && !std::isdigit(s[0]);
 }
 
-// void handleFloat(const char *value)
-// {
-//   float valueFloat = atof(value);
-//   float output = 0;
+bool ScalarConverter::isNumber(const std::string &s)
+{
+  std::string::const_iterator it = s.begin();
+  while (it != s.end() && std::isdigit(*it)) ++it;
+  return !s.empty() && it == s.end();
+}
 
-//   std::cout << FCYN("Float value is: ");
-//   if (extremeCasesInt(value)) { return ; }
+bool ScalarConverter::isException(const std::string &s)
+{
+  return (s == "nan" || s == "+inf" || s == "-inf" || s == "+inff" || s == "-inff");
+}
 
-//   if (valueFloat == 0)
-//   {
-//     for (size_t i = 0; i < strlen(value); i++) {
-//       output += (static_cast<float>(value[i]) == 48 ? 0 : value[i]);
-//     }
-//   } else {
-//     output = valueFloat;
-//   }
-//   std::cout << std::fixed << std::setprecision(1) << BOLD(FCYN(output)) << std::endl;
-// }
+void ScalarConverter::printChar(const std::string &literal)
+{
+  char c = literal[0];
+
+  std::ostringstream floatStream;
+  std::ostringstream doubleStream;
+  floatStream << std::fixed << std::setprecision(1) << static_cast<float>(c);
+  doubleStream << std::fixed << std::setprecision(1) << static_cast<double>(c);
+  
+  std::cout << FYEL("Char:\t\'") << BOLD(FYEL(c)) << FYEL("\'") << std::endl;
+  std::cout << FMAG("Int:\t") << BOLD(FMAG(static_cast<int>(c))) << std::endl;
+  std::cout << FCYN("Float:\t") <<  BOLD(FCYN(floatStream.str())) << FCYN("f") << std::endl;
+  std::cout << FGRN("Double:\t") <<  BOLD(FGRN(doubleStream.str())) << std::endl;
+}
+
+void ScalarConverter::printNumber(const std::string &literal)
+{
+  std::cout << "Number Detected: " << literal << std::endl;
+}
+
+void ScalarConverter::printException(const std::string &literal)
+{
+  std::cout << "Exception Detected: " << literal << std::endl;
+}

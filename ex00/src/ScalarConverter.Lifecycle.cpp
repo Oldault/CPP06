@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.Lifecycle.cpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:25:17 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/17 15:25:25 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/05/29 08:52:42 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
