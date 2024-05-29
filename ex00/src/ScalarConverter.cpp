@@ -6,7 +6,7 @@
 /*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:40:07 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/29 15:03:45 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:22:26 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,22 @@ void ScalarConverter::printNumber(const std::string &literal)
 
 void ScalarConverter::printException(const std::string &literal)
 {
-  std::cout << "Exception Detected: " << literal << std::endl;
+  if (literal == "nan") {
+    std::cout << FYEL("Char:\t\'") << BOLD(FYEL("Impossible")) << FYEL("\'") << std::endl;
+    std::cout << FMAG("Int:\t") << BOLD(FMAG("Impossible")) << std::endl;
+    std::cout << FCYN("Float:\t") <<  BOLD(FCYN("nan")) << FCYN("f") << std::endl;
+    std::cout << FGRN("Double:\t") <<  BOLD(FGRN("nan")) << std::endl;
+  } else if (literal == "+inf" || literal == "+inff") {
+    std::cout << FYEL("Char:\t") << BOLD(FYEL("∞")) << std::endl;
+    std::cout << FMAG("Int:\t") << BOLD(FMAG(INT_MAX)) << std::endl;
+    std::cout << FCYN("Float:\t") <<  BOLD(FCYN(__FLT_MAX__)) << FCYN("f") << std::endl;
+    std::cout << FGRN("Double:\t") <<  BOLD(FGRN(__DBL_MAX__)) << std::endl;
+  } else if (literal == "-inf" || literal == "-inff") {
+    std::cout << FYEL("Char:\t") << BOLD(FYEL("-∞")) << std::endl;
+    std::cout << FMAG("Int:\t") << BOLD(FMAG(INT_MIN)) << std::endl;
+    std::cout << FCYN("Float:\t") <<  BOLD(FCYN(__FLT_MIN__)) << FCYN("f") << std::endl;
+    std::cout << FGRN("Double:\t") <<  BOLD(FGRN(__DBL_MIN__)) << std::endl;
+  }
 }
 
 size_t get_precision(const std::string &s)
