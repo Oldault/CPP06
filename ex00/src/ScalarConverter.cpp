@@ -6,7 +6,7 @@
 /*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:40:07 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/29 09:51:17 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/29 14:36:34 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,15 @@ bool ScalarConverter::isChar(const std::string &s)
 bool ScalarConverter::isNumber(const std::string &s)
 {
   std::string::const_iterator it = s.begin();
-  while (it != s.end() && std::isdigit(*it)) ++it;
-  return !s.empty() && it == s.end();
+  size_t dot = 0;
+
+  if (*it == '-' || *it == '+') ++it;
+  while (it != s.end() && (std::isdigit(*it) || *it == '.')) {
+    if (*it == '.') dot++;
+    ++it;
+  }
+  if (*it == 'f') ++it;
+  return !s.empty() && it == s.end() && dot <= 1;
 }
 
 bool ScalarConverter::isException(const std::string &s)
