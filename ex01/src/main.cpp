@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
+/*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:43:27 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/30 14:21:10 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/30 17:00:17 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main()
   
   Data* deserializedPtr = Serializer::deserialize(serialized);
 
-  /* Assert interupts the program if there is am error */
+  /* Assert interupts the program if there is an error */
   assert(deserializedPtr == originalPtr);
   std::cout << "\n\t" << BOLD(BMAG(" ⭐ assert() test passed! ⭐ ")) << "\n\t" << FMAG("This means that the deserializedPtr \n\tand the originalPtr are the same!") << "\n\n";
   if (deserializedPtr) {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
+/*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:40:07 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/30 16:26:56 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/30 16:50:12 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void ScalarConverter::printNumber(const std::string &literal)
 void ScalarConverter::printException(const std::string &literal)
 {
   if (literal == "nan") {
-    std::cout << FYEL("Char:\t\'") << BOLD(FYEL("Impossible")) << FYEL("\'") << std::endl;
-    std::cout << FMAG("Int:\t") << BOLD(FMAG("Impossible")) << std::endl;
-    std::cout << FCYN("Float:\t") <<  BOLD(FCYN("nan")) << FCYN("f") << std::endl;
+    std::cout << FYEL("Char:\t") << BOLD(FRED("Impossible")) << std::endl;
+    std::cout << FMAG("Int:\t") << BOLD(FRED("Impossible")) << std::endl;
+    std::cout << FCYN("Float:\t") <<  BOLD(FCYN("nanf")) << std::endl;
     std::cout << FGRN("Double:\t") <<  BOLD(FGRN("nan")) << std::endl;
   } else if (literal == "+inf" || literal == "+inff") {
     std::cout << FYEL("Char:\t") << BOLD(FYEL("∞")) << std::endl;
