@@ -6,7 +6,7 @@
 /*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 08:50:26 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/30 10:57:51 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/30 14:28:05 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,4 @@ class Serializer
     static Data* deserialize(uintptr_t raw);
 };
 
-#endif // __SERILIZER_H__
+#endif // __SERILIZER_HPP__

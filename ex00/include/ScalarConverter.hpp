@@ -6,12 +6,12 @@
 /*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:16:27 by svolodin          #+#    #+#             */
-/*   Updated: 2024/05/29 08:59:47 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/30 14:28:23 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __SCALARCONVERTER_H__
-#define __SCALARCONVERTER_H__
+#ifndef __SCALARCONVERTER_HPP__
+#define __SCALARCONVERTER_HPP__
 
 #include "Colors.hpp"
 
@@ -21,10 +21,6 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <iomanip>
-
-// int  printError(int i);
-// int  extremeCasesChar(const std::string &literal);
-// int  extremeCasesInt(const std::string &literal);
 
 class ScalarConverter
 {
@@ -51,4 +47,4 @@ class ScalarConverter
 };
 
 
-#endif // __SCALARCONVERTER_H__
+#endif // __SCALARCONVERTER_HPP__
