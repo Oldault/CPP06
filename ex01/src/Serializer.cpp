@@ -6,7 +6,7 @@
 /*   By: oldault <oldault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 08:58:17 by oldault           #+#    #+#             */
-/*   Updated: 2024/05/30 10:59:19 by oldault          ###   ########.fr       */
+/*   Updated: 2024/05/30 14:17:36 by oldault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ Data* Serializer::deserialize(uintptr_t raw)
 {
   return reinterpret_cast<Data*>(raw);
 }
-
